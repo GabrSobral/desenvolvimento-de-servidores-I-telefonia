@@ -20,7 +20,7 @@ public class Assinante {
     //Métodos
     //Método para retornar o CPF do assinante
     public int getCPF() {
-        return CPF;
+        return CPF; s
     }
 
     //Retorna os dados do assinante
