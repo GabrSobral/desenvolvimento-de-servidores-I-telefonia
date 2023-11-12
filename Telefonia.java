@@ -37,7 +37,15 @@ public class Telefonia {
     }
 
      public void listarAssinantes() {
+        System.out.println("--- Pós-pagos ---");
 
+        for (int i = 0; i < numPosPagos; i++)
+            System.out.println("CPF:" + posPagos[i].getcpf());
+
+        System.out.println("--- Pré-pagos ---");
+
+        for (int i = 0; i < numPrePagos; i++)
+            System.out.println("CPF:" + prePagos[i].getcpf());
     }
 
     public void fazerChamada() {

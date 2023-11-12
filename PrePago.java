@@ -5,7 +5,7 @@ public class PrePago extends Assinante {
     private float creditos;
     private int numRecargas;
 
-    public PrePago(String cpf, String nome, int celularAssinante) {
+    public PrePago(String cpf, String nome, String celularAssinante) {
         super(cpf, nome, celularAssinante);
     }
 
