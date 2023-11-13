@@ -119,41 +119,14 @@ public class Telefonia {
     }
 
     private PrePago localizarPrePago(String cpf) {
-        for (int i = 0; i < this.numPrePagos; i++) {
-            String currentCpf = this.prePagos[i].getcpf();
 
-			if (currentCpf.compareTo(cpf) == 0)
-				return this.prePagos[i];
-		}
-        
-		return null;
     }  
 
     private PosPago localizarPosPago(String cpf) {
-		for (int i = 0; i < this.numPosPagos; i++) {
-            String currentCpf = this.posPagos[i].getcpf();
 
-			if (currentCpf.compareTo(cpf) == 0)
-				return this.posPagos[i];
-		}
-
-		return null;
     }
 
     public void imprimirFaturas() {
-        Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Digite o número do mês para impressão das faturas: ");
-		int month = scanner.nextInt();
-
-        System.out.println("--- Pós-pagos ---");
-
-        for (int i = 0; i < this.numPosPagos; i++)
-            this.posPagos[i].imprimirFatura(month);
-
-        System.out.println("--- Pré-pagos ---");
-            
-        for (int i = 0; i < this.numPrePagos; i++)
-            this.prePagos[i].imprimirFatura(month);
     }
 }
