@@ -141,6 +141,19 @@ public class Telefonia {
     }
 
     public void imprimirFaturas() {
+        Scanner scanner = new Scanner(System.in);
 
+		System.out.println("Digite o número do mês para impressão das faturas: ");
+		int month = scanner.nextInt();
+
+        System.out.println("--- Pós-pagos ---");
+
+        for (int i = 0; i < this.numPosPagos; i++)
+            this.posPagos[i].imprimirFatura(month);
+
+        System.out.println("--- Pré-pagos ---");
+            
+        for (int i = 0; i < this.numPrePagos; i++)
+            this.prePagos[i].imprimirFatura(month);
     }
 }
