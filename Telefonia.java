@@ -119,7 +119,14 @@ public class Telefonia {
     }
 
     private PrePago localizarPrePago(String cpf) {
+        for (int i = 0; i < this.numPrePagos; i++) {
+            String currentCpf = this.prePagos[i].getcpf();
 
+			if (currentCpf.compareTo(cpf) == 0)
+				return this.prePagos[i];
+		}
+        
+		return null;
     }  
 
     private PosPago localizarPosPago(String cpf) {
