@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class View {
@@ -71,6 +73,28 @@ public class View {
             newSubscriberCpf,
             newSubscriberName,
             newSubscriberTelephoneNumber
+        );
+    }
+
+    public static Chamada getCallDataByView(Scanner scanner) {
+        System.out.print("Digite o duração da chamada: ");
+        int newCallDuration = scanner.nextInt();
+
+        System.out.print("Digite a data da chamada: ");
+        String newCallDate = scanner.next();
+
+		SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy"); // date object to make the conversion
+        GregorianCalendar gregorianDate = new GregorianCalendar();// data convertida para GregorianCalendar
+
+        try {
+            gregorianDate.setTime(simpleDate.parse(newCallDate));
+        } catch(Exception ex) {
+            System.out.println(ex.toString());
+        }
+
+        return new Chamada (
+            gregorianDate,
+            newCallDuration
         );
     }
 }
