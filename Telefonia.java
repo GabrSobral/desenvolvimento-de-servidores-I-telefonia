@@ -130,7 +130,14 @@ public class Telefonia {
     }  
 
     private PosPago localizarPosPago(String cpf) {
+		for (int i = 0; i < this.numPosPagos; i++) {
+            String currentCpf = this.posPagos[i].getcpf();
 
+			if (currentCpf.compareTo(cpf) == 0)
+				return this.posPagos[i];
+		}
+
+		return null;
     }
 
     public void imprimirFaturas() {
