@@ -23,13 +23,13 @@ public class Telefonia {
 
         int selectedOption = scanner.nextInt();
 
-        if(selectedOption == 1) {
+        if (selectedOption == 1) {
             PosPago newPostPaidSubscriber = View.getPostPaidSubscriberDataByView(scanner);
 
             this.posPagos[numPosPagos] = newPostPaidSubscriber;
             this.numPosPagos++;
 
-            if(numPosPagos == posPagos.length) {
+            if (numPosPagos == posPagos.length) {
                 PosPago[] newPostPaid = new PosPago[posPagos.length + 10];
 
                 for (int i = 0; i < posPagos.length; i++)
@@ -43,7 +43,7 @@ public class Telefonia {
             this.prePagos[numPrePagos] = newPrePaidSubscriber;
             this.numPrePagos++;
 
-            if(numPrePagos == prePagos.length) {
+            if (numPrePagos == prePagos.length) {
                 PrePago[] newPrePaid = new PrePago[prePagos.length + 10];
 
                 for (int i = 0; i < prePagos.length; i++)
@@ -71,28 +71,28 @@ public class Telefonia {
 
         String[] subscriberOptions = { "1 - Pós-pago", "2 - Pré-pago", };
         View.printMenu(subscriberOptions);
-		int subscriberType = scanner.nextInt();
+        int subscriberType = scanner.nextInt();
 
-		System.out.println("Digite o CPF do assinante: ");
-		String subscriberCpf = scanner.next();
+        System.out.println("Digite o CPF do assinante: ");
+        String subscriberCpf = scanner.next();
 
-        if(subscriberType == 2) {
+        if (subscriberType == 2) {
             PrePago prePaid = this.localizarPrePago(subscriberCpf);
-            
-            if(prePaid != null) {
+
+            if (prePaid != null) {
                 Chamada call = View.getCallDataByView(scanner);
-                
+
                 prePaid.fazerChamada(call.getData(), call.getDuracao());
 
                 System.out.println("Chamada feita com sucesso!");
-            } else 
+            } else
                 System.out.println("Assinante pré-pago não encontrado!");
         } else {
             PosPago postPaid = this.localizarPosPago(subscriberCpf);
-            
-            if(postPaid != null) {
+
+            if (postPaid != null) {
                 Chamada call = View.getCallDataByView(scanner);
-                
+
                 postPaid.fazerChamada(call.getData(), call.getDuracao());
 
                 System.out.println("Chamada feita com sucesso!");
@@ -104,13 +104,13 @@ public class Telefonia {
     public void fazerRecarga() {
         Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Digite o CPF do assinante: ");
-		String subscriberCpf = scanner.next();
+        System.out.println("Digite o CPF do assinante: ");
+        String subscriberCpf = scanner.next();
         PrePago prePaid = localizarPrePago(subscriberCpf);
 
-        if(prePaid != null) {
+        if (prePaid != null) {
             Chamada call = View.getCallDataByView(scanner);
-                
+
             prePaid.recarregar(call.getData(), call.getDuracao());
 
             System.out.println("Recarga feita com sucesso!");
@@ -122,38 +122,38 @@ public class Telefonia {
         for (int i = 0; i < this.numPrePagos; i++) {
             String currentCpf = this.prePagos[i].getcpf();
 
-			if (currentCpf.compareTo(cpf) == 0)
-				return this.prePagos[i];
-		}
-        
-		return null;
-    }  
+            if (currentCpf.compareTo(cpf) == 0)
+                return this.prePagos[i];
+        }
+
+        return null;
+    }
 
     private PosPago localizarPosPago(String cpf) {
-		for (int i = 0; i < this.numPosPagos; i++) {
+        for (int i = 0; i < this.numPosPagos; i++) {
             String currentCpf = this.posPagos[i].getcpf();
 
-			if (currentCpf.compareTo(cpf) == 0)
-				return this.posPagos[i];
-		}
+            if (currentCpf.compareTo(cpf) == 0)
+                return this.posPagos[i];
+        }
 
-		return null;
+        return null;
     }
 
     public void imprimirFaturas() {
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Digite o número do mês para impressão das faturas: ");
+            int month = scanner.nextInt();
 
-		System.out.println("Digite o número do mês para impressão das faturas: ");
-		int month = scanner.nextInt();
+            System.out.println("--- Pós-pagos ---");
 
-        System.out.println("--- Pós-pagos ---");
+            for (int i = 0; i < this.numPosPagos; i++)
+                this.posPagos[i].imprimirFatura(month);
 
-        for (int i = 0; i < this.numPosPagos; i++)
-            this.posPagos[i].imprimirFatura(month);
+            System.out.println("--- Pré-pagos ---");
 
-        System.out.println("--- Pré-pagos ---");
-            
-        for (int i = 0; i < this.numPrePagos; i++)
-            this.prePagos[i].imprimirFatura(month);
+            for (int i = 0; i < this.numPrePagos; i++)
+                this.prePagos[i].imprimirFatura(month);
+        }
     }
 }
