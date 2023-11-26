@@ -1,3 +1,4 @@
+
 public class Assinante {
     // Atributos
     private String cpf;
